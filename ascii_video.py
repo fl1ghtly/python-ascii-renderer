@@ -4,10 +4,9 @@ import time
 import ascii_render
 
 FRAME_RATE = 30
-WEBCAM_SIZE = (64, 64)
-
 
 def render_webcam():
+    ascii_render.IMG_SIZE = (64, 64)
     ascii_render.ASCII_VALUES = " .:-=+*#%@"
 
     prev = 0
@@ -21,7 +20,7 @@ def render_webcam():
         
         if time_elapsed > 1/FRAME_RATE:
             prev = time.time()
-            frame = cv.resize(frame, WEBCAM_SIZE)
+            frame = cv.resize(frame, ascii_render.IMG_SIZE)
             cv.imshow('Input', frame)
 
             greyscale = Image.fromarray(frame).convert('L')

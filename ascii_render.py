@@ -44,11 +44,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Render Images with Text')
     
     parser.add_argument('file', metavar='f',
-                        help='the location to the file')
+                        help='the location of the file')
     
     parser.add_argument('-d', dest='dark_mode', action='store_true',
                         help='turn on dark mode rendering')
-    parser.add_argument('-s', dest='size', type=int, nargs=2)
+    parser.add_argument('-s', dest='size', type=int, nargs=2,
+                        help='size of the image')
     parser.add_argument('-w', dest='download', action='store_true',
                         help='save ascii render to a text file')
     args = parser.parse_args()
