@@ -20,7 +20,7 @@ def convert_ascii(img_arr: list):
     return np.reshape(img_arr, IMG_SIZE)
 
 
-def print_drawing(ascii_arr: np.ndarray, save: bool):
+def print_drawing(ascii_arr: np.ndarray, save=false):
     '''Prints a 2D ASCII array into the console
 
     Args:
@@ -50,7 +50,7 @@ if __name__ == '__main__':
                         help='turn on dark mode rendering')
     parser.add_argument('-s', dest='size', type=int, nargs=2)
     parser.add_argument('-w', dest='download', action='store_true',
-                        help='save it to a text file')
+                        help='save ascii render to a text file')
     args = parser.parse_args()
     parser.set_defaults(dark_mode=False)
     parser.set_defaults(download=False)

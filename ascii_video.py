@@ -4,8 +4,12 @@ import time
 import ascii_render
 
 FRAME_RATE = 30
+WEBCAM_SIZE = (64, 64)
+
 
 def render_webcam():
+    ascii_render.ASCII_VALUES = " .:-=+*#%@"
+
     prev = 0
     cap = cv.VideoCapture(0)
     if not cap.isOpened():
@@ -17,7 +21,7 @@ def render_webcam():
         
         if time_elapsed > 1/FRAME_RATE:
             prev = time.time()
-            frame = cv.resize(frame, ascii_render.IMG_SIZE)
+            frame = cv.resize(frame, WEBCAM_SIZE)
             cv.imshow('Input', frame)
 
             greyscale = Image.fromarray(frame).convert('L')
@@ -33,4 +37,6 @@ def render_webcam():
         
     cap.release()
     cv.destroyAllWindows()
-    
+
+if __name__ == '__main__':
+    render_webcam()
