@@ -20,7 +20,7 @@ def convert_ascii(img_arr: list):
     return np.reshape(img_arr, IMG_SIZE)
 
 
-def print_drawing(ascii_arr: np.ndarray, save=false):
+def print_drawing(ascii_arr: np.ndarray, save=False):
     '''Prints a 2D ASCII array into the console
 
     Args:
