@@ -1,12 +1,9 @@
 from PIL import Image
 import math
 import numpy as np
-import sys
 import cv2 as cv
-import os
 import time
 
-np.set_printoptions(threshold=sys.maxsize)
 #ASCII_VALUES = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,^. "
 ASCII_VALUES = " .^,:;Il!i><~+_-?][}{1)(|\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
 IMG_SIZE = (128, 128)
@@ -34,11 +31,13 @@ def print_drawing(ascii_arr: np.ndarray):
     Args:
         ascii_arr (ndarray)
     '''
+    frame = ''
     for row in ascii_arr:
         line = ''
         for pixel in row:
             line += pixel
-        print(line)
+        frame += line + '\n'
+    print(frame)
         
 
 def ascii_video():
@@ -62,8 +61,6 @@ def ascii_video():
             ascii_arr = convert_ascii(data)
             print_drawing(ascii_arr)
 
-        #os.system('cls')
-            
         # Key to exit is Escape
         exitKey = cv.waitKey(1)
         if exitKey == 27:
