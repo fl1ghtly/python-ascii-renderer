@@ -1,9 +1,9 @@
+from ctypes.wintypes import SIZE
 from PIL import Image
 import numpy as np
 import argparse
 
-#ASCII_VALUES = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,^. "
-ASCII_VALUES = " .^,:;Il!i><~+_-?][}{1)(|\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
+ASCII_VALUES = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,^. "
 IMG_SIZE = (64, 64)
 
 
@@ -39,11 +39,23 @@ def print_drawing(ascii_arr: np.ndarray):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Render Images with Text')
+    
     parser.add_argument('file', metavar='f',
                         help='the location to the file')
-    args = parser.parse_args()
     
-    file = args[0]
+    parser.add_argument('-d', dest='dark_mode', action='store_true',
+                        help='turn on dark mode rendering')
+    parser.add_argument('-s', dest='size', type=int, nargs=2)
+    args = parser.parse_args()
+    parser.set_defaults(dark_mode=False)
+
+    if args.size:
+        IMG_SIZE = tuple(args.size)
+        
+    if args.dark_mode:
+        ASCII_VALUES = " .^,:;Il!i><~+_-?][}{1)(|\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
+        
+    file = args.file
     image = Image.open(file)
     resized = image.resize(IMG_SIZE)
     greyscale = resized.convert('L')
